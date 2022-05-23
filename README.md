@@ -1,38 +1,55 @@
-# go-starter
+# config
 
 [![CI](https://github.com/sraphs/config/actions/workflows/ci.yml/badge.svg)](https://github.com/sraphs/config/actions/workflows/ci.yml)
 
->  Go project template repository
-
-
-## Work flow
-
-1. Create a new repository from go-starter
-2. Use `make rename` to change go mod name
-2. Create a dev branch from main
-3. Make changes
-4. Commit code
-5. Merge pull requests
-5. Create tag
-6. Git Action auto generate CHANGELOG.md and create release
-
-## Features
-
-- xxxx
-- xxxx
-- xxxx
-
-## Install
-
-```bash
-go get github.com/sraphs/config
-```
+>  Go configuration library
 
 ## Usage
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+```go
+package config_test
+
+import (
+	"path"
+
+	"github.com/sraphs/config"
+	"github.com/sraphs/config/env"
+	"github.com/sraphs/config/file"
+	"github.com/sraphs/config/flag"
+	testData "github.com/sraphs/config/internal/testdata"
+)
+
+func Example() {
+	p := path.Join("internal", "testdata")
+
+	c := config.New(
+		config.WithSource(
+			env.NewSource("sraph_"),
+			file.NewSource(p),
+			flag.NewSource(),
+		),
+	)
+
+	if err := c.Load(); err != nil {
+		panic(err)
+	}
+
+	var conf testData.Conf
+
+	if err := c.Scan(&conf); err != nil {
+		panic(err)
+	}
+
+	c.Watch(func(c config.Config) {
+		c.Scan(&conf)
+	})
+
+	// fmt.Println(conf)
+
+	// Output:
+}
+
+```
 
 ## Contributing
 
