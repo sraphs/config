@@ -3,11 +3,11 @@ package config_test
 import (
 	"path"
 
-	"github.com/sraphs/go/config"
-	"github.com/sraphs/go/config/env"
-	"github.com/sraphs/go/config/file"
-	"github.com/sraphs/go/config/flag"
-	testData "github.com/sraphs/go/config/internal/testdata"
+	"github.com/sraphs/config"
+	"github.com/sraphs/config/env"
+	"github.com/sraphs/config/file"
+	"github.com/sraphs/config/flag"
+	testData "github.com/sraphs/config/internal/testdata"
 )
 
 func Example() {

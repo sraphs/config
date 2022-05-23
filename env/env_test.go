@@ -5,8 +5,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/sraphs/go/config"
-	"github.com/sraphs/go/x/maps"
+	"github.com/sraphs/maps"
+
+	"github.com/sraphs/config"
 )
 
 func TestEnvWithPrefix(t *testing.T) {
@@ -60,7 +61,7 @@ func TestEnvWithPrefix(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			actual := maps.Get(conf, test.path)
+			actual, _ := maps.Get(conf, test.path).String()
 			if !reflect.DeepEqual(test.expect, actual) {
 				t.Errorf("expect %v, actual %v", test.expect, actual)
 			}
@@ -117,7 +118,7 @@ func TestEnvWithoutPrefix(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			actual := maps.Get(conf, test.path)
+			actual, _ := maps.Get(conf, test.path).String()
 			if !reflect.DeepEqual(test.expect, actual) {
 				t.Errorf("expect %v, actual %v", test.expect, actual)
 			}

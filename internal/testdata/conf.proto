@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package testdata;
 
-option go_package = "github.com/sraphs/go/config/internal/testdata";
+option go_package = "github.com/sraphs/config/internal/testdata";
 
 import "google/protobuf/duration.proto";
 

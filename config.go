@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sraphs/go/log"
+	"github.com/sraphs/log"
 )
 
 var (
@@ -79,7 +79,13 @@ func (c *config) Load() error {
 func (c *config) Scan(v interface{}) error {
 	c.descriptors.Range(func(key, value interface{}) bool {
 		d := value.(*Descriptor)
-		if err := d.GetCodec().Unmarshal(d.Data, v); err != nil {
+
+		codec := d.GetCodec()
+		if codec == nil {
+			return true
+		}
+
+		if err := codec.Unmarshal(d.Data, v); err != nil {
 			return true
 		}
 		return true

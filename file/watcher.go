@@ -7,7 +7,7 @@ import (
 
 	"github.com/fsnotify/fsnotify"
 
-	"github.com/sraphs/go/config"
+	"github.com/sraphs/config"
 )
 
 type watcher struct {

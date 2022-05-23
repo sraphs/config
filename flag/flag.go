@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"os"
 
-	"github.com/sraphs/go/config"
+	"github.com/sraphs/config"
 )
 
 var _ config.Source = (*flag)(nil)

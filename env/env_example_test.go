@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/sraphs/go/config"
-	"github.com/sraphs/go/config/env"
-	"github.com/sraphs/go/config/internal/testdata"
+	"github.com/sraphs/config"
+	"github.com/sraphs/config/env"
+	"github.com/sraphs/config/internal/testdata"
 )
 
 var conf = new(testdata.Conf)
@@ -50,10 +50,6 @@ func Example() {
 
 	fmt.Println(conf)
 
-	os.Setenv("sraph_log_level", "debug")
-
-	select {}
-
 	// Output:
-	// log:{level:"info"} server:{http:{addr:":8000" timeout:{seconds:1}} grpc:{addr:":9000" timeout:{seconds:1}}} data:{database:{driver:"mysql"} redis:{addr:"redis:6379" read_timeout:{seconds:2} write_timeout:{seconds:3}}}
+	// log:{level:"info"}  server:{http:{addr:":8000"  timeout:{seconds:1}}  grpc:{addr:":9000"  timeout:{seconds:1}}}  data:{database:{driver:"mysql"}  redis:{addr:"redis:6379"  read_timeout:{seconds:2}  write_timeout:{seconds:3}}}
 }

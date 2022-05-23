@@ -7,8 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/sraphs/go/config"
-	"github.com/sraphs/go/x/maps"
+	"github.com/sraphs/maps"
+
+	"github.com/sraphs/config"
 )
 
 const (

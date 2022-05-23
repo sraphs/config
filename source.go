@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/sraphs/go/encoding"
+	"github.com/sraphs/encoding"
 )
 
 // Source is config source.

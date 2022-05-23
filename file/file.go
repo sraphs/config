@@ -6,8 +6,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/sraphs/go/config"
-	"github.com/sraphs/go/x/strslices"
+	"github.com/sraphs/strslices"
+
+	"github.com/sraphs/config"
 )
 
 var _ config.Source = (*file)(nil)

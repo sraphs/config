@@ -3,9 +3,8 @@ package config
 import (
 	"testing"
 
+	"github.com/sraphs/encoding"
 	"github.com/stretchr/testify/assert"
-
-	"github.com/sraphs/go/encoding"
 )
 
 func TestDescriptor_GetCodec(t *testing.T) {
