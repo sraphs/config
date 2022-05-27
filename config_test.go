@@ -4,8 +4,6 @@ import (
 	"errors"
 	"reflect"
 	"testing"
-
-	"github.com/sraphs/maps"
 )
 
 const (
@@ -121,6 +119,9 @@ func TestConfig(t *testing.T) {
 
 	c := New(
 		WithSource(newTestJSONSource(_testJSON)),
+		WithDecoder(defaultDecoder),
+		WithResolver(defaultResolver),
+		WithLog(),
 	)
 	err = c.Close()
 	if err != nil {
@@ -129,23 +130,20 @@ func TestConfig(t *testing.T) {
 
 	jSource := newTestJSONSource(_testJSON)
 	opts := options{
-		sources: []Source{jSource},
+		sources:  []Source{jSource},
+		decoder:  defaultDecoder,
+		resolver: defaultResolver,
 	}
 	cf := &config{}
 	cf.opts = opts
+	cf.reader = newReader(opts)
 
 	err = cf.Load()
 	if err != nil {
 		t.Fatal("t is not nil")
 	}
 
-	conf := make(map[string]interface{})
-
-	if err := cf.Scan(&conf); err != nil {
-		t.Fatal("t is not nil")
-	}
-
-	val, err := maps.Get(conf, "data.database.driver").String()
+	val, err := cf.Get("data.database.driver").String()
 	if err != nil {
 		t.Fatal("t is not nil")
 	}
@@ -154,7 +152,6 @@ func TestConfig(t *testing.T) {
 	}
 
 	err = cf.Watch(func(c Config) {})
-
 	if err != nil {
 		t.Fatal("t is not nil")
 	}
