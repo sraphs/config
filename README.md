@@ -10,6 +10,8 @@
 package config_test
 
 import (
+	"fmt"
+	"os"
 	"path"
 
 	"github.com/sraphs/config"
@@ -20,7 +22,9 @@ import (
 )
 
 func Example() {
-	p := path.Join("internal", "testdata")
+	os.Setenv("sraph_log_level", "warn")
+
+	p := path.Join("internal", "testdata", "yaml")
 
 	c := config.New(
 		config.WithSource(
@@ -44,10 +48,14 @@ func Example() {
 		c.Scan(&conf)
 	})
 
-	// fmt.Println(conf)
+	fmt.Println(&conf)
 
-	// Output:
+	c.Get("log.level").String()
+
+	// Outputs:
+	// log:{level:"warn"}  server:{http:{addr:"0.0.0.0:8000"  timeout:{seconds:1}}  grpc:{addr:"0.0.0.0:9000"  timeout:{seconds:1}}}  data:{database:{driver:"mysql"}  redis:{addr:"mysql:6379"  read_timeout:{nanos:200000000}  write_timeout:{nanos:200000000}}}
 }
+
 
 ```
 
